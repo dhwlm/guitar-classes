@@ -3,8 +3,12 @@ import fire from '../fire';
 import _ from 'lodash';
 
 class AddStudent extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
+
+    let isEdit
+    if(props.location.pathname.indexOf('edit') > 0) isEdit = true;
+    else isEdit = false;
 
     this.state = {
       firstName: '',
@@ -17,6 +21,7 @@ class AddStudent extends React.Component {
       feesPendingSessions: '',
       lastSessionOn: '',
       status:false,
+      isEdit: isEdit,
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -25,7 +30,7 @@ class AddStudent extends React.Component {
 
   componentWillMount(){
     let _this = this;
-    if(this.props.location.pathname.indexOf('edit') > 0){
+    if(this.state.isEdit){
       fire.database().ref('students/' + this.props.match.params.id).once('value').then(function(snapshot) {
         _this.setState({
           firstName: snapshot.val().firstName,
@@ -45,37 +50,40 @@ class AddStudent extends React.Component {
 
   addStudent(e){
     e.preventDefault();
-    const studentRef = fire.database().ref('students');
-    const student = {
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      email:this.state.email,
-      batchTime: this.state.batchTime,
-      batchLevel: this.state.batchLevel,
-      mobile: this.state.mobile,
-      totalSessions: this.state.totalSessions || 1,
-      feesPendingSessions: this.state.feesPendingSessions || 1,
-      lastSessionOn: this.state.lastSessionOn || '',
-      addedOn:  _.now(),
-      imagePath: 'avatar.jpg',
-      status: true
+    if(!this.state.isEdit){
+      const studentRef = fire.database().ref('students');
+      const student = {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email:this.state.email,
+        batchTime: this.state.batchTime,
+        batchLevel: this.state.batchLevel,
+        mobile: this.state.mobile,
+        totalSessions: this.state.totalSessions || 1,
+        feesPendingSessions: this.state.feesPendingSessions || 1,
+        lastSessionOn: this.state.lastSessionOn || '',
+        addedOn:  _.now(),
+        imagePath: 'avatar.jpg',
+        status: true
+      }
+      studentRef.push(student);
+      // const pushRef = studentRef.push(student);
+      // const userKey = pushRef.key;
+    }else{
+      fire.database().ref('students/' + this.props.match.params.id).set({
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email:this.state.email,
+        batchTime: this.state.batchTime,
+        batchLevel: this.state.batchLevel,
+        mobile: this.state.mobile,
+        totalSessions: this.state.totalSessions || 1,
+        feesPendingSessions: this.state.feesPendingSessions || 1,
+        lastSessionOn: this.state.lastSessionOn || '',
+        status: true
+      });
     }
-    studentRef.push(student);
-    // const pushRef = studentRef.push(student);
-    // const userKey = pushRef.key;
 
-    this.setState({
-      firstName: '',
-      lastName: '',
-      email: '',
-      batchTime: '',
-      batchLevel: '',
-      mobile: '',
-      totalSessions: '',
-      feesPendingSessions: '',
-      lastSessionOn: '',
-      status:false,
-    });
     this.props.history.push('/');
   }
 
@@ -89,7 +97,13 @@ class AddStudent extends React.Component {
     return <div className="container">
       <div className="row">
         <div className="col-md-8 order-md-1">
-          <h4 className="mb-3">Add Student</h4>
+          <h4 className="mb-3">
+            {this.state.isEdit?(
+              'Edit Student'
+            ):(
+              'Add Student'
+            )}
+          </h4>
           <form className="needs-validation" onSubmit={this.addStudent} noValidate autoComplete="off">
             <div className="row">
               <div className="col-md-6 mb-3">
@@ -193,7 +207,13 @@ class AddStudent extends React.Component {
               </div>
             </div>
 
-            <button className="btn btn-primary btn-lg btn-block" type="submit">Add Student</button>
+            <button className="btn btn-primary btn-lg btn-block" type="submit">
+              {this.state.isEdit?(
+                'Edit Details'
+              ):(
+                'Add Student'
+              )}
+            </button>
           </form>
         </div>
       </div>

@@ -18,21 +18,21 @@ class Student extends React.Component {
 
   incrementSessions(){
     this.setState({
-      totalSessions: this.state.totalSessions + 1,
-      feesPendingSessions: this.state.feesPendingSessions + 1,
+      totalSessions: parseInt(this.state.totalSessions) + 1,
+      feesPendingSessions: parseInt(this.state.feesPendingSessions) + 1,
     });
   }
 
   decrementSessions(){
     this.setState({
-      totalSessions: this.state.totalSessions - 1,
-      feesPendingSessions: this.state.feesPendingSessions - 1,
+      totalSessions: parseInt(this.state.totalSessions) - 1,
+      feesPendingSessions: parseInt(this.state.feesPendingSessions) - 1,
     });
   }
 
   payFees(){
     this.setState({
-      feesPendingSessions: this.state.feesPendingSessions - 4,
+      feesPendingSessions: parseInt(this.state.feesPendingSessions) - 4,
     });
   }
 
