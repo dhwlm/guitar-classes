@@ -1,0 +1,109 @@
+body {
+  overflow-x: hidden;
+  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: #fff;
+  padding-top: 5.5rem; }
+
+p {
+  line-height: 1.75; }
+
+a {
+  color: #123249; }
+  a:hover {
+    color: #081620; }
+
+.text-primary {
+  color: #123249 !important; }
+
+.text-secondary {
+  color: #d29b6f !important; }
+
+.bg-primary {
+  background-color: #123249 !important;
+  color: #fff !important; }
+
+.bg-secondary {
+  background-color: #d29b6f !important; }
+
+.border-secondary {
+  border-color: #d29b6f !important; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+
+section {
+  padding: 100px 0; }
+  section h2.section-heading {
+    font-size: 40px;
+    margin-top: 0;
+    margin-bottom: 15px; }
+  section h3.section-subheading {
+    font-size: 16px;
+    font-weight: 400;
+    font-style: italic;
+    margin-bottom: 75px;
+    text-transform: none;
+    font-family: 'Playfair Display', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+
+@media (min-width: 768px) {
+  section {
+    padding: 120px 0; } }
+
+.btn {
+  font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700; }
+
+.btn-xl {
+  font-size: 18px;
+  padding: 20px 40px; }
+
+.btn-primary {
+  background-color: #123249;
+  border-color: #123249;
+  color: #fff; }
+  .btn-primary:active, .btn-primary:focus, .btn-primary:hover {
+    background-color: #0a1d2a !important;
+    border-color: #0a1d2a !important; }
+  .btn-primary:active, .btn-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(254, 209, 55, 0.5) !important; }
+
+::-moz-selection {
+  background: #123249;
+  text-shadow: none; }
+
+::selection {
+  background: #123249;
+  text-shadow: none; }
+
+img::selection {
+  background: transparent; }
+
+img::-moz-selection {
+  background: transparent; }
+
+.drop-shadow {
+  filter: drop-shadow(-4px 3px 5px rgba(0, 0, 0, 0.5)); }
+
+.box-shadow {
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05); }
+
+.no-select {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */ }
